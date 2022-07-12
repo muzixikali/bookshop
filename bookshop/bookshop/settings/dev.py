@@ -52,9 +52,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'bookshop.urls'
 
 TEMPLATES = [
+    # jinja2配置
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',  # 配置jinja2模板引擎
-        'DIRS': [os.path.join(BASE_DIR,'templates')],    # 模板文件夹的加载路径
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 模板文件夹的加载路径
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,9 +65,27 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             # 补充jinja2模板引擎环境
-            'environment':'bookshop.utils.jinja2_env.jinja2_environment'
+            'environment': 'bookshop.utils.jinja2_env.jinja2_environment'
         },
+
     },
+
+    # 原有配置
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+
+    }
+
 ]
 
 WSGI_APPLICATION = 'bookshop.wsgi.application'
@@ -75,9 +94,14 @@ WSGI_APPLICATION = 'bookshop.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 配置mysql数据库
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',  # 数据库主机
+        'PORT': 3306,  # 数据库端口
+        'USER': 'root',  # 用户名
+        'PASSWORD': 's1234567890',  # 密码
+        'NAME': 'bookshop'  # 数据库名
     }
 }
 
