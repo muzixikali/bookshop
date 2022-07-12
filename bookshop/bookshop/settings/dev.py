@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -53,8 +53,8 @@ ROOT_URLCONF = 'bookshop.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',  # 配置jinja2模板引擎
+        'DIRS': [os.path.join(BASE_DIR,'templates')],    # 模板文件夹的加载路径
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +63,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # 补充jinja2模板引擎环境
+            'environment':'bookshop.utils.jinja2_env.jinja2_environment'
         },
     },
 ]
