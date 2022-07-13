@@ -12,6 +12,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os.path
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,6 +31,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# 追加导包路径，简化注册流程
+sys.path.append(os.path.join(BASE_DIR,'apps'))
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 子应用注册
-    'bookshop.apps.users',
+    'users',
 ]
 
 MIDDLEWARE = [
